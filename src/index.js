@@ -77,6 +77,12 @@ export default class IdleTimer extends Component {
      */
     onIdle: PropTypes.func,
     /**
+     * Function to call when an event occurs that updates the user's last active time
+     * default: () => {}
+     * @type {Function}
+     */
+    onEvent: PropTypes.func,
+    /**
      * Function to call when user becomes active
      * default: () => {}
      * @type {Function}
@@ -306,6 +312,10 @@ export default class IdleTimer extends Component {
       pageX: e.pageX, // update mouse coord
       pageY: e.pageY
     })
+
+    if (this.props.onEvent) {
+      this.props.onEvent(e);
+    }
 
     // Set a new timeout
     const { timeout } = this.props
